@@ -7,6 +7,8 @@ interface SocketContextProps {
     socket: Socket;
 }
 
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL
+
 const SocketContext = createContext<SocketContextProps | undefined>(undefined);
 
 export const useSocket = () => {
@@ -20,7 +22,7 @@ export const useSocket = () => {
 }
 
 export function SocketProvider({ children }: { children: React.ReactNode }) {
-    const socket = io('http://192.168.100.8:8080');
+    const socket = io(backendUrl!);
 
     return (
         <SocketContext.Provider value={{ socket }}>
